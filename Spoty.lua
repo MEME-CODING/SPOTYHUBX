@@ -23,6 +23,7 @@ local Gui = Instance.new("ScreenGui",plr.PlayerGui)
 Gui.Name = "SpotyHub"
 
 local Embed = Instance.new("Frame",Gui)
+Embed.ZIndex = 99
 Embed.Name = "EmbedBg"
 Embed.BackgroundColor3 = Color3.new(0,0,0)
 Embed.Position = UDim2.new(0.196, 0,0.269, 0)
