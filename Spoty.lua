@@ -666,13 +666,13 @@ end)
 uis.InputBegan:Connect(function(inp)
 	if inp.KeyCode == Enum.KeyCode.LeftAlt then
 		if debris == true then
-			for _, v in pairs(game.Players:GetPlayers()) do
-				if v.Team ~= plr.Team then
-					local esp = Instance.new("Highlight",v.Character)
+			for _, v in pairs(workspace:GetDescendants()) do
+				if v:FindFirstChild("Humanoid") then
+					local esp = Instance.new("Highlight",v)
 					esp.Name = "EspBox"
 					esp.FillColor = Color3.new(0.215686, 1, 0.282353)
 
-					local embed = Instance.new("BillboardGui",v.Character.Head)
+					local embed = Instance.new("BillboardGui",v.Head)
 					embed.Size = UDim2.new(8,0,4,0)
 					embed.StudsOffset = Vector3.new(0,3,0)
 					embed.AlwaysOnTop = true
@@ -681,7 +681,7 @@ uis.InputBegan:Connect(function(inp)
 					Name.Size = UDim2.new(1,0,1,0)
 					Name.BackgroundTransparency = 1
 					Name.Font = Enum.Font.Jura
-					Name.Text = v.Character.Humanoid.DisplayName .. ": " .. v.Character.Humanoid.Health
+					Name.Text = v.Humanoid.DisplayName .. ": " .. v.Humanoid.Health
 					Name.TextScaled = true
 					Name.TextColor3 = Color3.new(0.227451, 1, 0.639216)
 
@@ -695,11 +695,14 @@ uis.InputBegan:Connect(function(inp)
 			end
 			debris = false
 		elseif debris == false then
-			for _, v in pairs(game.Players:GetPlayers()) do
-					if v.Character:FindFirstChild("EspBox") then
-						v.Character:FindFirstChild("EspBox"):Destroy()
-						v.Character.Head:FindFirstChild("embed"):Destroy()
+			for _, v in pairs(workspace:GetDescendants()) do
+				if v:FindFirstChild("Humanoid") then
+
+					if v:FindFirstChild("EspBox") then
+						v:FindFirstChild("EspBox"):Destroy()
+						v.Head:FindFirstChild("embed"):Destroy()
 					end
+				end
 			end
 			debris = true
 		end
